@@ -1,0 +1,14 @@
+CONFIG = {
+    'mode': 'django',
+    'python':'/bin/pyhton',
+    'working_dir': '/code',
+    'group': 'www-data',
+    'args': (
+        '--bind=unix:/tmp/gunicorn.sock',
+        '--workers=5',
+        # '--worker-class=egg:gunicorn#sync',
+        '--timeout=230',
+        'wsgi-app',
+    ),
+}
+

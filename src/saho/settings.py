@@ -11,10 +11,16 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
+def get_env(key, default=None):
+    return os.environ.get('saho_' + key, default)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -25,7 +31,7 @@ SECRET_KEY = 'django-insecure-pdgp5dlt^5r0l9voar)8yxyqwsvl3+dq-_avhr6mf__w_@9$-b
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -75,10 +81,15 @@ WSGI_APPLICATION = 'saho.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': get_env('DB_NAME', 'hedayat_app_db'),
+        'USER': get_env('POSTGRES_USER', 'hedayat_app_usr'),
+        'PASSWORD': get_env('POSTGRES_PASSWORD', 'GarShavadAghlGhomiKharab'),
+        'HOST': '172.40.1.71',
+        'PORT': get_env('POSTGRES_PORT', '5432'),
     }
 }
+
 
 
 # Password validation
