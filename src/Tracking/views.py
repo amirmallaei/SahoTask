@@ -1,6 +1,12 @@
 from django.shortcuts import render
 from django.views.generic import ListView
+from django.views.generic import TemplateView
 from .models import UserActivity
+
+
+class LandingPageView(TemplateView):
+    template_name = 'landing.html' 
+
 
 class UserActivityListView(ListView):
     """Log User Activities HTML Page"""
