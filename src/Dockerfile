@@ -12,7 +12,7 @@ RUN pip install --upgrade pip
 
 RUN mkdir /code
 WORKDIR /code
-ADD requierments.txt /code
+ADD requirements.txt /code
 
-RUN pip install -r requierments.txt
+RUN pip install -r requirements.txt
 ADD . /code
