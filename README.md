@@ -21,8 +21,8 @@ This project is a simple Django application running inside Docker, including use
 Clone this repository to your local machine:
 
 ```bash
-git git@github.com:amirmallaei/SahoTask1.git
-cd SahoTask1
+git git@github.com:amirmallaei/SahoTask.git
+cd SahoTask
 ```
 
 ### 2. Build and Start Docker Containers
