@@ -14,13 +14,12 @@ from pathlib import Path
 import os
 
 
+def get_env(key, default=None):
+    return os.environ.get('SAHO_' + key, default)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-def get_env(key, default=None):
-    return os.environ.get('saho_' + key, default)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -43,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'Tracking',
 ]
 
 MIDDLEWARE = [
@@ -82,14 +83,13 @@ WSGI_APPLICATION = 'saho.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': get_env('DB_NAME', 'hedayat_app_db'),
-        'USER': get_env('POSTGRES_USER', 'hedayat_app_usr'),
+        'NAME': get_env('DB_NAME', 'saho_app_db'),
+        'USER': get_env('POSTGRES_USER', 'saho_app_usr'),
         'PASSWORD': get_env('POSTGRES_PASSWORD', 'GarShavadAghlGhomiKharab'),
-        'HOST': '172.40.1.71',
+        'HOST': '192.168.1.101',
         'PORT': get_env('POSTGRES_PORT', '5432'),
     }
 }
-
 
 
 # Password validation

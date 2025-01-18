@@ -1,11 +1,10 @@
 version: "3"
-# Maintainer Amir Mallaei @ Gmail .com
-services:
 
+services:
   app:
     build: .
     image: saho
-    container_name: Sahp_app
+    container_name: Saho_app
     restart: unless-stopped
     ports:
       - "8081:8081"
@@ -13,32 +12,39 @@ services:
       - ./:/code
       - "../db/files/static:/code/static:ro"
       - "../db/files/media:/code/media:rw"
+
     command: bash Deployment/bashes/createDB.sh
-    links:
+    
+    environment:
+      SAHO_DB_NAME: saho_app_db
+      SAHO_POSTGRES_USER: saho_app_usr
+      SAHO_POSTGRES_PASSWORD: GarShavadAghlGhomiKharab
+      SAHO_POSTGRES_HOST: db
+      SAHO_POSTGRES_PORT: 5432
+
+    depends_on:
       - db
     networks:
-      dobare_app_net:
+      saho_app_net: 
         ipv4_address: 192.168.1.100
 
   db:
-    image: postgres:10-alpine
+    image: postgres:14-alpine
+    container_name: saho_app_db
     restart: always
-    volumes:
-      - ./db/postgres-data:/var/lib/postgresql/data
     environment:
-       - POSTGRES_DB=saho
-       - POSTGRES_USER=saho
-       - POSTGRES_PASSWORD=saho1234
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "50m"
+      POSTGRES_DB: saho_app_db
+      POSTGRES_USER: saho_app_usr
+      POSTGRES_PASSWORD: GarShavadAghlGhomiKharab
+
+    volumes:
+      - ../db/postgres-data:/var/lib/postgresql/data
     networks:
-      dobare_app_net:
+      saho_app_net: 
         ipv4_address: 192.168.1.101
 
 networks:
-  dobare_app_net:
+  saho_app_net:
     ipam:
       driver: default
       config:
