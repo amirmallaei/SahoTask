@@ -22,7 +22,7 @@ Clone this repository to your local machine:
 
 ```bash
 git git@github.com:amirmallaei/SahoTask.git
-cd SahoTask
+cd SahoTask/src
 ```
 
 ### 2. Build and Start Docker Containers
