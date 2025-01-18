@@ -11,21 +11,20 @@ services:
       - "8081:8081"
     volumes:
       - ./:/code
-      - "./db/files/static:/code/static:ro"
-      - "./db/files/media:/code/media:rw"
+      - "../db/files/static:/code/static:ro"
+      - "../db/files/media:/code/media:rw"
     command: bash Deployment/bashes/createDB.sh
     links:
       - db
     networks:
       dobare_app_net:
-        ipv4_address: 182.29.100.45
-
+        ipv4_address: 192.168.1.100
 
   db:
     image: postgres:10-alpine
     restart: always
     volumes:
-    - ./db/postgres-data:/var/lib/postgresql/data
+      - ./db/postgres-data:/var/lib/postgresql/data
     environment:
        - POSTGRES_DB=saho
        - POSTGRES_USER=saho
@@ -34,15 +33,13 @@ services:
       driver: "json-file"
       options:
         max-size: "50m"
-
     networks:
       dobare_app_net:
-        ipv4_address: 182.29.100.46
-
+        ipv4_address: 192.168.1.101
 
 networks:
-    dobare_app_net:
-        ipam:
-            driver: default
-            config:
-                - subnet: 182.29.100.0/16
+  dobare_app_net:
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.1.0/24

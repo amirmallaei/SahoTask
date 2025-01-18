@@ -1,4 +1,4 @@
-FROM python:3.13
+FROM python:3.9
 
 LABEL Maintainer="AMIRMALLAEI@Gmail.com"
 # Set environment variables
@@ -6,9 +6,9 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 # install dependencies
+RUN apt-get update -y && apt-get install -y gcc ghostscript libc-dev tzdata 
 
-RUN apt-get update -y && apt-get install -y gcc ghostscript
-RUN pip install --upgrade pip
+RUN pip install --upgrade pip setuptools wheel
 
 RUN mkdir /code
 WORKDIR /code
